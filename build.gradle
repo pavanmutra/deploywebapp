@@ -25,7 +25,7 @@ task buildDocker(type: Docker) {
   
 }
 
-task runBuild(type:Exec) {
+task runTomcat(type:Exec) {
     workingDir '.'
 
    
@@ -35,7 +35,7 @@ task runBuild(type:Exec) {
 }
 
 task cleanImage(type:Exec) {
-  commandLine "docker", "stop" ,"mytomcat"
-  commandLine "docker", "rm" ,"mytomcat"
+  //commandLine "docker", "stop" ,"mytomcat"
+  commandLine "docker", "rm" ,"-f","mytomcat"
 
 }
