@@ -51,3 +51,12 @@ task cleanImage(type:Exec) {
   commandLine " sudo", " docker", "rm" ,"-f","mytomcat"
 
 }
+
+
+
+def dockerTest(version, buildTag){
+    exec {
+         executable "sh"
+         args "-c", "sudo docker ps -a"
+    }
+}
