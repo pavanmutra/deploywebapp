@@ -25,14 +25,26 @@ task buildDocker(type: Docker) {
   
 }
 
+task buildImage(type:Exec){
+workingDir '.'
+
+    commandLine "docker", " build", " -t", " pavan", " ."
+
+}
+
 task runTomcat(type:Exec) {
+dependsOn {buildImage}
     workingDir '.'
+   commandLine "docker", "run","-p" ,"9090:8080" ,"--name", "mytomcat" , "-d", "pavan" 
 
    
-    commandLine "docker", " build", " ."
-    commandLine "docker", "run","-p" ,"9090:8080" ,"--name", "mytomcat" , "-d", "pavan" 
+   
     
 }
+
+runTomcat.dependsOn buildImage
+
+
 
 task cleanImage(type:Exec) {
   //commandLine "docker", "stop" ,"mytomcat"
