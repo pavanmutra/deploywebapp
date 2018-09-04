@@ -28,14 +28,14 @@ task buildDocker(type: Docker) {
 task buildImage(type:Exec){
 workingDir '.'
 
-    commandLine " sudo" ," docker", " build", " -t", " pavan", " ."
+    commandLine " docker", " build", " -t", " pavan", " ."
 
 }
 
 task runTomcat(type:Exec) {
 dependsOn {buildImage}
     workingDir '.'
-   commandLine " sudo",  " docker", "run","-p" ,"9090:8080" ,"--name", "mytomcat" , "-d", "pavan" 
+   commandLine   " docker", "run","-p" ,"9090:8080" ,"--name", "mytomcat" , "-d", "pavan" 
 
    
    
@@ -48,15 +48,6 @@ runTomcat.dependsOn buildImage
 
 task cleanImage(type:Exec) {
   //commandLine "docker", "stop" ,"mytomcat"
-  commandLine " sudo", " docker", "rm" ,"-f","mytomcat"
+  commandLine  " docker", "rm" ,"-f","mytomcat"
 
-}
-
-
-
-def dockerTest(version, buildTag){
-    exec {
-         executable "sh"
-         args "-c", "sudo docker ps -a"
-    }
 }
